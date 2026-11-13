@@ -22,11 +22,13 @@
 #define SEED_COLOR       (Color){61, 255, 228, 255}
 #define WALKER_COLOR     (Color){0, 240, 255, 100}
 
-#define GRID_COLS 180
-#define GRID_ROWS 145
-#define CELL_RAD 4.0f
+#define GRID_COLS 360
+#define GRID_ROWS 290
+#define CELL_RAD 2.0f
 
-#define NUM_WALKER 6000
+#define NUM_WALKER 24000
+#define FAST_FORWARD_STEPS 1200
+#define FREEZE_THRESHOLD 10
 
 // Gradient sticking probability table indexed by frozen neighbor count N (0 to 6)
 extern const int STICKING_PROB[7];
@@ -51,6 +53,7 @@ extern Walker walkers[NUM_WALKER];
 // Grid, simulation, and projection functions
 void grid_init(void);
 void walkers_update(void);
+void freeze_cell_symmetric(int x, int y);
 int count_frozen_neighbors(int x, int y);
 void draw_simulation(void);
 Vector2 hex_to_screen(int x, int y);

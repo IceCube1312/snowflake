@@ -1,7 +1,7 @@
 #include "snowflake.h"
 
-// 2D grid storing state of each cell
 uint8_t grid[GRID_ROWS][GRID_COLS];
+static uint8_t hit_count[GRID_ROWS][GRID_COLS];
 
 // 6 neighbor directions for even and odd rows: E, W, NE, NW, SE, SW
 const int HEX_EVEN[6][2] = {
@@ -22,8 +22,8 @@ const int HEX_ODD[6][2] = {
 	{ 0,  1}  // South-West
 };
 
-// Gradient sticking probabilities for N = 0 to 6 frozen neighbors
-const int STICKING_PROB[7] = { 0, 15, 1, 90, 100, 100, 100 };
+const int STICKING_PROB[7] = { 0, 20, 30, 70, 85, 85, 85 };
+//const int STICKING_PROB[7] = { 0, 100, 100, 100,100, 100, 100 };
 
 Walker walkers[NUM_WALKER];
 
@@ -48,6 +48,7 @@ void grid_init(void) {
 	for (int y = 0; y < GRID_ROWS; y++) {
 		for (int x = 0; x < GRID_COLS; x++) {
 			grid[y][x] = CELL_EMPTY;
+			hit_count[y][x] = 0;
 		}
 	}
 	grid[GRID_ROWS / 2][GRID_COLS / 2] = CELL_SEED;
@@ -72,6 +73,40 @@ int count_frozen_neighbors(int x, int y) {
 	return count;
 }
 
+void freeze_cell_symmetric(int x, int y) {
+	int x0 = GRID_COLS / 2;
+	int y0 = GRID_ROWS / 2;
+
+	int r0 = y0;
+	int q0 = x0 - (y0 - (y0 & 1)) / 2;
+
+	int r = y;
+	int q = x - (y - (y & 1)) / 2;
+
+	int dq = q - q0;
+	int dr = r - r0;
+
+	int q_curr = dq;
+	int r_curr = dr;
+
+	for (int i = 0; i < 6; i++) {
+		int r_abs = r_curr + r0;
+		int q_abs = q_curr + q0;
+
+		int ny = r_abs;
+		int nx = q_abs + (ny - (ny & 1)) / 2;
+
+		if (nx >= 0 && nx < GRID_COLS && ny >= 0 && ny < GRID_ROWS) {
+			grid[ny][nx] = CELL_FROZEN;
+		}
+
+		int q_next = -r_curr;
+		int r_next = q_curr + r_curr;
+		q_curr = q_next;
+		r_curr = r_next;
+	}
+}
+
 void walkers_update(void) {
 	for (int i = 0; i < NUM_WALKER; i++) {
 		int dir = rand() % 6;
@@ -94,7 +129,14 @@ void walkers_update(void) {
 			int roll = rand() % 100;
 
 			if (roll < STICKING_PROB[neighbors]) {
-				grid[ny][nx] = CELL_FROZEN;
+				hit_count[ny][nx]++;
+				if (hit_count[ny][nx] >= FREEZE_THRESHOLD) {
+					// Stage 3 (Single cell freeze):
+					// grid[ny][nx] = CELL_FROZEN;
+
+					// Stage 4 (6-way forced symmetry):
+					freeze_cell_symmetric(nx, ny);
+				}
 				walker_spawn_edge(&walkers[i]);
 				continue;
 			}

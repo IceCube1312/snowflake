@@ -18,7 +18,10 @@ int main(int argc, char **argv){
 		if (IsKeyPressed(KEY_R)) grid_init();
 
 		if (!paused) {
-			walkers_update();
+			int steps = IsKeyDown(KEY_W) ? FAST_FORWARD_STEPS : 1;
+			for (int s = 0; s < steps; s++) {
+				walkers_update();
+			}
 		}
 
 		BeginDrawing();
