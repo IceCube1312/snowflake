@@ -29,7 +29,6 @@ int main(int argc, char **argv){
 
 		draw_hex_lattice();
 
-		// Draw seed at center
 		Vector2 seed_pos = hex_to_screen(GRID_COLS / 2, GRID_ROWS / 2);
 		DrawCircleV(seed_pos, CELL_RAD * 1.5f, SEED_COLOR);
 

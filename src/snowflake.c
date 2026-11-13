@@ -131,10 +131,7 @@ void walkers_update(void) {
 			if (roll < STICKING_PROB[neighbors]) {
 				hit_count[ny][nx]++;
 				if (hit_count[ny][nx] >= FREEZE_THRESHOLD) {
-					// Stage 3 (Single cell freeze):
-					// grid[ny][nx] = CELL_FROZEN;
-
-					// Stage 4 (6-way forced symmetry):
+					//grid[ny][nx] = CELL_FROZEN;
 					freeze_cell_symmetric(nx, ny);
 				}
 				walker_spawn_edge(&walkers[i]);
