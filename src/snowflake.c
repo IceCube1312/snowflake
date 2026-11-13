@@ -131,8 +131,8 @@ void walkers_update(void) {
 			if (roll < STICKING_PROB[neighbors]) {
 				hit_count[ny][nx]++;
 				if (hit_count[ny][nx] >= FREEZE_THRESHOLD) {
-					grid[ny][nx] = CELL_FROZEN;
-					//freeze_cell_symmetric(nx, ny);
+					//grid[ny][nx] = CELL_FROZEN;
+					freeze_cell_symmetric(nx, ny);
 				}
 				walker_spawn_edge(&walkers[i]);
 				continue;

@@ -27,8 +27,8 @@
 #define CELL_RAD 2.0f
 
 #define NUM_WALKER 24000
-#define FAST_FORWARD_STEPS 1000
-#define FREEZE_THRESHOLD 7
+#define FAST_FORWARD_STEPS 100
+#define FREEZE_THRESHOLD 2
 
 // Gradient sticking probability table indexed by frozen neighbor count N (0 to 6)
 extern const int STICKING_PROB[7];
