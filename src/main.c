@@ -12,13 +12,15 @@ int main(int argc, char **argv){
 	grid_init();
 
 	bool paused = false;
+	bool fast_forward = false;
 
 	while (!WindowShouldClose()) {
 		if (IsKeyPressed(KEY_SPACE)) paused = !paused;
 		if (IsKeyPressed(KEY_R)) grid_init();
+		if (IsKeyPressed(KEY_W)) fast_forward = !fast_forward;
 
 		if (!paused) {
-			int steps = IsKeyDown(KEY_W) ? FAST_FORWARD_STEPS : 1;
+			int steps = fast_forward ? FAST_FORWARD_STEPS : 1;
 			for (int s = 0; s < steps; s++) {
 				walkers_update();
 			}
