@@ -13,9 +13,8 @@
 
 #define WIDTH 1280
 #define HEIGHT 900
-#define FRAME_RATE 120
+#define FRAME_RATE 60
 
-// Palettes
 #define TERMINAL_GREEN   (Color){1, 15, 6, 255}
 #define GRID_DIM         (Color){53, 79, 47,255}
 #define ICE_WHITE        (Color){152, 250, 233, 255}
@@ -27,10 +26,9 @@
 #define CELL_RAD 2.0f
 
 #define NUM_WALKER 24000
-#define FAST_FORWARD_STEPS 100
-#define FREEZE_THRESHOLD 2
+#define FAST_FORWARD_STEPS 3000
+#define FREEZE_THRESHOLD 20
 
-// Gradient sticking probability table indexed by frozen neighbor count N (0 to 6)
 extern const int STICKING_PROB[7];
 
 typedef enum {

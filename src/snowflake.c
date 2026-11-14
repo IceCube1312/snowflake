@@ -22,7 +22,7 @@ const int HEX_ODD[6][2] = {
 	{ 0,  1}  // South-West
 };
 
-const int STICKING_PROB[7] = { 0, 20, 30, 70, 85, 85, 85 };
+const int STICKING_PROB[7] = { 0, 30, 15, 70, 85, 95, 100 };
 //const int STICKING_PROB[7] = { 0, 100, 100, 100,100, 100, 100 };
 
 Walker walkers[NUM_WALKER];
@@ -131,8 +131,8 @@ void walkers_update(void) {
 			if (roll < STICKING_PROB[neighbors]) {
 				hit_count[ny][nx]++;
 				if (hit_count[ny][nx] >= FREEZE_THRESHOLD) {
-					//grid[ny][nx] = CELL_FROZEN;
-					freeze_cell_symmetric(nx, ny);
+					grid[ny][nx] = CELL_FROZEN;
+					//freeze_cell_symmetric(nx, ny);
 				}
 				walker_spawn_edge(&walkers[i]);
 				continue;

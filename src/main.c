@@ -35,10 +35,6 @@ int main(int argc, char **argv){
 		DrawCircleV(seed_pos, CELL_RAD * 1.5f, SEED_COLOR);
 
 		draw_simulation();
-
-		DrawText(fast_forward ? "SPEED: FAST FORWARD [HOLD W]" : "SPEED: 1x [HOLD W TO BOOST]", 20, 20, 20, fast_forward ? YELLOW : RAYWHITE);
-		if (paused) DrawText("PAUSED [SPACE]", 20, 45, 20, RED);
-
 		EndDrawing();
 	}
 
