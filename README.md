@@ -1,14 +1,10 @@
 <img width="1920" height="1080" alt="20261114_12h18m34s_grim" src="https://github.com/user-attachments/assets/4a7ba62b-128c-455c-ae18-f962a95bbb82" />
-<img width="1920" height="1080" alt="20261113_14h47m43s_grim" src="https://github.com/user-attachments/assets/53d1f521-a73f-4515-a8e8-b7f6b7a09a66" />
 <img width="1920" height="1080" alt="20261113_15h13m21s_grim" src="https://github.com/user-attachments/assets/f3736f05-b039-4f27-a656-b885dc27faf2" />
 
 # snowflake
 
-A minimal C-based simulation demonstrating snowflake crystal growth, Mullins-Sekerka instability, and dendritic faceting via Diffusion-Limited Aggregation (DLA) and surface attachment kinetics on a hexagonal lattice. Built with Raylib.
-
-## Dependencies
-- `gcc`
-- `raylib`
+A C based simulation where I try to simulate the mechanics of actual snowflake formation and growth by minimally modelling vapour diffusion, coordination dependant sticking probability and Mullins Sekerka instability.
+Inspired from Brownian trees and modified to make beautiful and nice snowflakes.
 
 ## Build & Run
 #### For Linux - 
